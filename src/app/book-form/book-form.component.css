@@ -1,0 +1,16 @@
+.inline{
+    /*display: inline;*/
+}
+hr{
+    border-top:none;
+}
+h2{
+    text-align: center;
+}
+
+.book-title{
+    color:mediumslateblue;
+}
+.error{
+    color:red;
+}

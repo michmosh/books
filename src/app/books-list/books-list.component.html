@@ -1,0 +1,41 @@
+ 
+ <div class="row " >
+    <div class="col-md-6 col-md-offset-3" >
+      <div class="row padding">
+        <app-book-form class="pull-right" [editBook]='book' [index]="index" [data]="data" (event)="onEvent($event)"></app-book-form>
+      </div>
+      <div class="row padding-left" *ngFor="let book of data ;let i = index">
+        <div class="panel panel-default shadow">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{book.Title | titlePipe :book.Title }}</h3>
+            </div>
+            <div class="panel-body flex">
+              <div class="row">
+                  <div class="col-md-3">
+                  <img [src]="'assets/images/'+book.imageUrlString+'.jpg'"
+                   class="panel-image" alt="{{book.Title}}"
+                   onError="this.src='assets/images/default.jpg';"/>
+                </div>
+                <div class="col-md-3">
+                  <span ><strong> Autuor:</strong> {{book.Autuor}}</span>
+                </div>
+                <div class="col-md-3">
+                    <span>Date:{{book.date}}</span>
+                </div>
+                <div class="col-md-3">
+                    <div class="buttons pull-right">
+                      <button class="btn btn-primary" data-toggle="modal" data-target=".books-modal" (click)="edit(book , i)">Edit</button>
+                      <button class="btn btn-danger" data-toggle="modal" data-target=".delete-modal" (click)="delete(book , i)">Delete</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+
+  

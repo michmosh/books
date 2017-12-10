@@ -1,0 +1,57 @@
+<button class="btn pull-right add" data-toggle="modal" data-target="#myModal" (click)="changeForm('add')">+ Add</button>
+
+<div class="modal fade books-modal" #myModal id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{form_title}} <span class="book-title"> {{editBook.Title}} </span></h4>
+      </div>
+       <form [formGroup]="myForm">
+      <div class="modal-body">
+       
+          <label>Title: </label>
+          <input type="text" #titleInput class="form-control" 
+                 name="Title" id="Title" 
+                 [value]="editBook.Title " 
+                 formControlName="Title" >
+          <div class="error">{{titleError}}</div>
+
+          <label>Autuor: {{editBook.Autuor}}</label>
+          <input type="text" #AutuorInput class="form-control" 
+                 name="Autuor" id="Autuor" 
+                 [value]="editBook.Autuor" 
+                 formControlName="Autuor">
+          <div class="error">{{autuorError}}</div>
+           <label>Date: </label>
+          <input type="date" #dateInput class="form-control" 
+                 name="date" id="date" 
+                 [value]="editBook.date" 
+                 formControlName="date" >
+          <div class="error">{{dateError}}</div>
+          <hr>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="close-button" data-dismiss="modal">Close</button>
+        <button type="submit" *ngIf="form_type=='add'" class="btn btn-success" (click)="addBook(myForm,myModal)"  >{{form_button}}</button>
+        <button type="submit" *ngIf="form_type=='edit'" class="btn btn-success" (click)="updateBook(myForm,myModal)" >{{form_button}}</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade delete-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Are you sure you want to delete <span class="book-title"> {{editBook.Title}} </span></h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)='delete(myForm)'>Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
