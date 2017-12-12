@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import {Book} from '../book';
 import {BooksService} from '../books.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-books-list',
   templateUrl: './books-list.component.html',
@@ -11,7 +13,8 @@ export class BooksListComponent implements OnInit {
   book:Book = {Title:'',Autuor:'',date:new Date()}
   index:number;
   error:string = '';
-  constructor(private service:BooksService) { }
+  modalRef: BsModalRef;
+  constructor(private service:BooksService , private modalService: BsModalService) { }
 
   ngOnInit() {
     this.getData();
@@ -28,9 +31,18 @@ export class BooksListComponent implements OnInit {
     this.book = book;
   }
 
-  delete(book:Book, index:number){
-    this.index = index;
+  delete( index:number){
+   this.data.splice(this.index,1);
+   this.closeModal();
+  }
+
+  openModal(template: TemplateRef<any>,book:Book) {
     this.book = book;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeModal(){
+     this.modalRef.hide();
   }
 
   onEvent(event:any){
