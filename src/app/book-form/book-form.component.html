@@ -32,7 +32,7 @@
           <hr>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="close-button" data-dismiss="modal" (click)="closeModal()">Close</button>
+        <button type="button" class="btn btn-default" id="close-button" data-dismiss="modal" >Close</button>
         <button type="submit" *ngIf="form_type=='add'" class="btn btn-success" (click)="addBook(myForm,myModal)"  >{{form_button}}</button>
         <button type="submit" *ngIf="form_type=='edit'" class="btn btn-success" (click)="updateBook(myForm,myModal)" >{{form_button}}</button>
       </div>
