@@ -1,10 +1,8 @@
-import { Component, OnInit, Input ,OnChanges ,SimpleChanges ,Output ,EventEmitter , TemplateRef  } from '@angular/core';
+import { Component, OnInit, Input ,OnChanges ,SimpleChanges ,Output ,EventEmitter  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormControl } from '@angular/forms';
 import {Book} from '../book';
 import {BooksService} from '../books.service';
 import { DatePipe } from '@angular/common';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-book-form',
@@ -19,25 +17,20 @@ export class BookFormComponent implements OnInit {
   autuorError:string;
   dateError:string;
   titleError:string;
-  modalRef: BsModalRef;
   @Input() editBook:Book;
   @Input() index:number;
   @Input() data:any[];
   @Output() event:EventEmitter<any> = new EventEmitter<any>();
-   
-  constructor(
-          private fb: FormBuilder ,
-          private service:BooksService ) {
-          this.myForm = fb.group({
-            Title:[null,Validators.required],
-            Autuor:[null , Validators.compose([Validators.required , Validators.minLength(5) , Validators.maxLength(15)])],
-            date:[null , Validators.compose([Validators.required])]
-          });
+    constructor(private fb: FormBuilder , private service:BooksService) {
+      this.myForm = fb.group({
+        Title:[null,Validators.required],
+        Autuor:[null , Validators.compose([Validators.required , Validators.minLength(5) , Validators.maxLength(15)])],
+        date:[null , Validators.compose([Validators.required])]
+      })
   }
 
   ngOnInit() {
   }
-
   
   ngOnChanges(changes:SimpleChanges){
     if(changes['editBook'] && !changes['editBook'].firstChange){
@@ -133,6 +126,7 @@ export class BookFormComponent implements OnInit {
   checkExistingTitle(form:any){
     let valid = true;
     this.data.map( item =>{
+      debugger;
         if(item.Title.toLowerCase() === form.value.Title.toLowerCase() && this.index !== this.data.indexOf(item)){
           valid = false;
           this.titleError = "title already exists";
@@ -142,7 +136,7 @@ export class BookFormComponent implements OnInit {
   }
 
   closeModal(modal){
-    this.myForm.reset();
+    modal.click();
   }
  
 
