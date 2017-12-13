@@ -31,13 +31,14 @@ export class BooksListComponent implements OnInit {
     this.book = book;
   }
 
-  delete( index:number){
-   this.data.splice(this.index,1);
+  delete(index:number){
+   this.data.splice(index,1);
    this.closeModal();
   }
 
   openModal(template: TemplateRef<any>,book:Book) {
     this.book = book;
+    this.index = this.data.indexOf(this.book);
     this.modalRef = this.modalService.show(template);
   }
 
