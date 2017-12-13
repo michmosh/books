@@ -7,6 +7,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class BooksService {
   url:string =  'https://my-json-server.typicode.com/michmosh/'; 
+  newUrl:string = 'http://fakerestapi.azurewebsites.net//api/Books';
   headers:HttpHeaders = new HttpHeaders().set( "Content-type","application/json; charset=UTF-8");
   data:Array<Book>;
   constructor(private http:HttpClient) {
@@ -17,7 +18,7 @@ export class BooksService {
      return this.data;
    }
    getApiData(){
-     return this.http.get(this.url + 'angular4_books/books').map(res=>{  
+     return this.http.get(this.url + 'angular4_Books/books').map(res=>{  
        return this.setDataArray(res);
      })
    }

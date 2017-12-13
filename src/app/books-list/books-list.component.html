@@ -4,41 +4,63 @@
       <div class="row padding">
         <app-book-form class="pull-right" [editBook]='book' [index]="index" [data]="data" (event)="onEvent($event)"></app-book-form>
       </div>
-      <div class="row padding-left" *ngFor="let book of data ;let i = index">
-        <div class="panel panel-default shadow">
+      <div class="container-fluid">
+        <div class="row padding-left" *ngFor="let book of data ;let i = index">
+          <div class="panel panel-default shadow">
             <div class="panel-heading">
               <h3 class="panel-title">{{book.Title | titlePipe :book.Title }}</h3>
             </div>
             <div class="panel-body flex">
-              <div class="row">
+              <div class="container-fluid">
+                <div class="row">
                   <div class="col-md-3">
-                  <img [src]="'assets/images/'+book.imageUrlString+'.jpg'"
-                   class="panel-image" alt="{{book.Title}}"
-                   onError="this.src='assets/images/default.jpg';"/>
-                </div>
-                <div class="col-md-3">
-                  <span ><strong> Autuor:</strong> {{book.Autuor}}</span>
-                </div>
-                <div class="col-md-3">
-                    <span>Date:{{book.date}}</span>
-                </div>
+                    <img [src]="'assets/images/'+book.imageUrlString+'.jpg'"
+                    class="panel-image" alt="{{book.Title}}"
+                    onError="this.src='assets/images/default.jpg';"/>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <span ><strong> Autuor:</strong> {{book.Autuor }}</span>
+                      </div>
+                      <div class="col-md-6">
+                          <span>Date:{{book.date}}</span>
+                      </div>
+                    </div>
+                    <hr class="spacer">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p>
+                          <i>
+                            " Hay muchas variaciones de
+                              los pasajes de Lorem Ipsum disponibles, 
+                              pero la mayoría sufrió alteraciones en alguna manera, 
+                              ya sea porque se le agregó humor, 
+                              o palabras aleatorias que no parecen ni un poco creíbles..."
+                          </i>  
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 <div class="col-md-3">
                     <div class="buttons pull-right">
-                      <button class="btn btn-primary" data-toggle="modal" data-target=".books-modal" (click)="edit(book , i)">Edit</button>
-                      <button class="btn btn-danger" data-toggle="modal" data-target=".delete-modal" (click)="openModal(deleteTemplate,book)">Delete</button>
+                      <button class="btn btn-primary " data-toggle="modal" data-target=".books-modal" (click)="edit(book , i)">Edit</button>
+                      <button class="btn btn-danger " data-toggle="modal" data-target=".delete-modal" (click)="openModal(deleteTemplate,book)">Delete</button>
                     </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <!--delete template-->
   <ng-template #deleteTemplate>
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <button type="button" class="close" (click)='closeModal()' aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title">Are you sure you want to delete <span class="book-title"> {{book.Title}} </span></h4>
     </div>
     <div class="modal-footer">

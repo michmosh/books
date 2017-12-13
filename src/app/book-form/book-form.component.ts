@@ -41,7 +41,7 @@ export class BookFormComponent implements OnInit {
   }
 
   addBook(form,modal){
-    if(form.status == "VALID" && form.touched && this.checkExistingTitle(form)){
+    if( this.checkExistingTitle(form) && form.touched && form.status == "VALID" ){
       let book = {
           Title:form.value.Title , 
           Autuor : form.value.Autuor,
@@ -126,7 +126,6 @@ export class BookFormComponent implements OnInit {
   checkExistingTitle(form:any){
     let valid = true;
     this.data.map( item =>{
-      debugger;
         if(item.Title.toLowerCase() === form.value.Title.toLowerCase() && this.index !== this.data.indexOf(item)){
           valid = false;
           this.titleError = "title already exists";
@@ -136,8 +135,10 @@ export class BookFormComponent implements OnInit {
   }
 
   closeModal(modal){
+    this.titleError = '';
+    this.autuorError = '';
+    this.dateError = '';
     modal.click();
   }
  
-
 }
